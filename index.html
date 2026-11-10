@@ -96,6 +96,7 @@
     <button class="tablinks" onclick="openTab(event, 'DutyExecution')">Duty Execution</button>
     <button class="tablinks" onclick="openTab(event, 'Communications & Teamwork')">Communications & Teamwork</button>
     <button class="tablinks" onclick="openTab(event, 'Conduct & Grammar')">Conduct & Grammar</button>
+    <button class="tablinks" onclick="openTab(event, 'Testing'); lockTesting()">Testing</button>
   </div>
 
   <div id="DutyExecution" class="tabcontent">
@@ -279,6 +280,26 @@
     <button onclick="resetSubtab(this)">Reset this tab</button>
   </div>
 
+  <div id="Testing" class="tabcontent">
+  <div id="testing-lock">
+    <p><strong>Enter PIN to view this section</strong></p>
+    <input type="password" id="testing-pin" inputmode="numeric" maxlength="4" placeholder="PIN"
+           onkeydown="if (event.key === 'Enter') checkTestingPin()">
+    <button onclick="checkTestingPin()">Unlock</button>
+    <p id="testing-error" style="color: red; display: none;">Incorrect PIN. Try again.</p>
+  </div>
+  <div id="testing-list" style="display: none;">
+    <span><strong>Testing Notes</strong></span>
+    <ul>
+      <li>Filler text item one – replace with real content</li>
+      <li>Filler text item two – replace with real content</li>
+      <li>Filler text item three – replace with real content</li>
+      <li>Filler text item four – replace with real content</li>
+      <li>Filler text item five – replace with real content</li>
+    </ul>
+  </div>
+</div>
+  
   <textarea id="copied-text-area" placeholder="Selected items will appear here."></textarea>
   <button id="copy-button" onclick="copySelectedText()">Copy Selected Text</button>
 
@@ -317,6 +338,27 @@
       evt.currentTarget.style.backgroundColor = 'green'; // Set active subtab green
       evt.currentTarget.style.color = 'white';
     }
+
+    const TESTING_PIN = '1320';
+
+function lockTesting() {
+  document.getElementById('testing-lock').style.display = 'block';
+  document.getElementById('testing-list').style.display = 'none';
+  document.getElementById('testing-error').style.display = 'none';
+  document.getElementById('testing-pin').value = '';
+}
+
+function checkTestingPin() {
+  const pinInput = document.getElementById('testing-pin');
+  if (pinInput.value === TESTING_PIN) {
+    document.getElementById('testing-lock').style.display = 'none';
+    document.getElementById('testing-list').style.display = 'block';
+  } else {
+    document.getElementById('testing-error').style.display = 'block';
+    pinInput.value = '';
+    pinInput.focus();
+  }
+}
 
     function resetSubtab(button) {
       const container = button.closest('.subtabcontent') || button.closest('.tabcontent');
