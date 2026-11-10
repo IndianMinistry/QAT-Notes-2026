@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Assurance Test Notes Tool</title>
+  <span><strong>By IndianMinistry</strong></span><br>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .tab,
+    .subtab {
+      overflow: hidden;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .tab button,
+    .subtab button {
+      background-color: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 10px 16px;
+      transition: 0.3s;
+    }
+
+    .tab button:hover,
+    .subtab button:hover {
+      background-color: #ddd;
+    }
+
+    .tab button.active,
+    .subtab button.active {
+      background-color: #ccc;
+    }
+
+    .tabcontent,
+    .subtabcontent {
+      display: none;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+    }
+
+    #copied-text-area {
+      width: 100%;
+      min-height: 100px;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-family: monospace;
+      white-space: pre-wrap;
+      /* Preserve line breaks */
+    }
+
+    #copy-button {
+      margin-top: 10px;
+      padding: 8px 30px;
+      cursor: pointer;
+    }
+
+    .editable-text {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 2px 4px;
+      margin: 0 2px;
+      font-size: 1em;
+      /* width: 100px; */
+      /* No fixed width, adjusts to content */
+      display: inline-block;
+      /* Important for inline spacing and handling */
+      min-width: 50px;
+      /* Ensure it doesn't collapse when empty */
+      text-align: left;
+    }
+
+    .editable-text:focus {
+      background-color: #f0f0f0;
+      outline: none;
+      border-color: #aaa;
+    }
+    
+  </style>
+</head>
+
+<body onload="loadProgress(); updateCopiedText()">
+
+  <h2>Quality Assurance Test Notes Tool</h2>
+
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'DutyExecution')">Duty Execution</button>
+    <button class="tablinks" onclick="openTab(event, 'Communications & Teamwork')">Communications & Teamwork</button>
+    <button class="tablinks" onclick="openTab(event, 'Conduct & Grammar')">Conduct & Grammar</button>
+  </div>
+
+  <div id="DutyExecution" class="tabcontent">
+    <div class="subtab">
+      <button class="subtablinks" onclick="openSubTab(event, 'NewLifeRule')">New Life Rule</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'WarningSystem')">Warning System</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'ContrabandUnderstanding')">Contraband Understanding</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'BorderAbandonment')">Border Abandonment</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'ArrivalOnScene')">Arrival on Scene</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'GeneralAwareness')">General Awareness</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'TrustedIndividuals')">Trusted Individuals</button>
+      <button class="subtablinks" onclick="openSubTab(event, 'Miscellaneous')">Miscellaneous</button>
+    </div>
+
+    <div id="NewLifeRule" class="subtabcontent">
+      <span><strong>TNI</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish a Nighthawk in accordance to the New Life Rule</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished a Nighthawk in accordance to the New Life Rule</label><br>
+      <br>
+      <span><strong>Ally</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish an ally in accordance to the New Life Rule</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished an ally in accordance to the New Life Rule</label><br>
+      <br>
+      <span><strong>Citizen</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish a citizen in accordance to the New Life Rule</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished a citizen in accordance to the New Life Rule</label><br>
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="WarningSystem" class="subtabcontent">
+      <span><strong>Stacked Warnings</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You did not stack any warnings, either from your own warnings or on top of warnings from others</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> There was an instance(s) where you stacked warnings instead of arresting a <span class="editable-text" contenteditable="true">team</span> for committing a second offense after being warned for an offense previously</label><br>
+      <br>
+      <span><strong>Failed Application</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You applied the Warning System to an individual for <span class="editable-text" contenteditable="true">input</span> which isn't a crime, and thus should not have been punished for</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to apply the Warning System to an individual for <span class="editable-text" contenteditable="true">input</span> which is a crime, and thus should have been punished for</label><br>
+      <br>
+      <span><strong>Infected</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You correctly dealt with an infected zombie when they started using their infected tools by killing them instead of arresting them</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You incorrectly dealt with an infected zombie when they started using their infected tools by arresting them instead of killing them</label><br>
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="ContrabandUnderstanding" class="subtabcontent">
+      <span><strong>Tear Gas</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish a citizen for having tear gas, this was to be dealt with by killing them</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished a citizen for having tear gas</label><br>
+      <br>
+      <span><strong>Taser</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish a citizen for having a taser, this was to be dealt with by killing them</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished a citizen for having a taser</label><br>
+      <br>
+      <span><strong>Other Tools</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to properly punish a citizen for having a <span class="editable-text" contenteditable="true">toolname</span>, this was to be dealt with by arresting them</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly punished a citizen for having a <span class="editable-text" contenteditable="true">toolname</span></label><br>
+
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="BorderAbandonment" class="subtabcontent">
+      <span><strong>Passed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You ensured to not abandon the border in accordance with our rules for leaving the mandatory patrol positions</label><br>
+      <br>
+      <span><strong>Failed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You abandoned the border while there was at least 1 citizen present in the last 3 minutes, which goes against our rules for leaving the mandatory patrol positions</label>
+      <br>
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="ArrivalOnScene" class="subtabcontent">
+      <span><strong>Passed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a situation where Arrival on Scene was tested, where you intervened and ask for what happened, then using factors such as health and credibility (based on individuals, morph(s), statements, etc), you made the correct decision in letting them continue</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a situation where Arrival on Scene was tested, where you intervened and ask for what happened, then using factors such as health and credibility (based on individuals, morph(s), statements, etc), you made the correct decision in applying the Warning System</label><br>
+      <br>
+      <span><strong>Failed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You incorrectly dealt with a situation where Arrival on Scene was tested, where you failed to intervene and ask for what happened, then using factors such as health and credibility (based on individuals, morph(s), statements, etc), to make a decision</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You incorrectly dealt with a situation where Arrival on Scene was tested, where you intervened and ask for what happened, but then failed to use factors such as health and credibility (based on individuals, morph(s), statements, etc), to make a decision</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You incorrectly dealt with a situation where Arrival on Scene was tested, where you intervened and ask for what happened, then using factors such as health and credibility (based on individuals, morph(s), statements, etc), you made the decision to <span class="editable-text" contenteditable="true">input</span> instead of <span class="editable-text" contenteditable="true">input</span> and that was wrong because <span class="editable-text" contenteditable="true">input</span> </label><br>
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="GeneralAwareness" class="subtabcontent">
+      <span><strong>Scale</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> On a scale of 1-10, your general awareness during this event was a <strong>10</strong> as there were no instances where awareness was an issue</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> On a scale of 1-10, your general awareness during this event was a <strong>8-9</strong> as there were minimal instances where awareness was an issue, although one instance where it could have improved was when <span class="editable-text" contenteditable="true">input</span></label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> On a scale of 1-10, your general awareness during this event was a <strong>6-7</strong> as there were instances where awareness was an issue, such as when <span class="editable-text" contenteditable="true">input</span> and another being <span class="editable-text" contenteditable="true">input</span></label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> On a scale of 1-10, your general awareness during this event was below a <strong>5</strong> as there many instances where awareness was an issue. Awareness was a major issue when <span class="editable-text" contenteditable="true">input</span>,</label><br>
+
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="TrustedIndividuals" class="subtabcontent">
+      <span><strong>Passed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly acted on information from a trusted individual</label><br>
+      <br>
+      <span><strong>Failed</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You failed to act on information from a trusted individual</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You acted on information from a non-trusted individual when you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+    <div id="Miscellaneous" class="subtabcontent">
+      <span><strong>Nuisancy</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with nuisancy via the Warning System</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with nuisancy and instead of applying the Warning System, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Shooting Cameras</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with TNI/Ally shooting cameras via the Warning System</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with TNI/Ally shooting cameras and instead of applying the Warning System, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Re-entering Border</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a citizen re-entering border through scanner after being in the city via the Warning System</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a citizen re-entering border through scanner after being in the city and instead of applying the Warning System, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Utilizing Contraband</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a citizen using contraband to enter a restricted area via an immediate arrest</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a citizen using contraband to enter a restricted area and instead of immediately arresting, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Aiding KOS</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with an individual aiding KOS via an immediate arrest</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with an individual aiding KOS and instead of immediately arresting, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Radio</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You efficiently utilized your radio when overwhelmed and in need of backup</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> There was an instance, or multiple instances where usage of radio was optimal, although it was not utilized. Use the radio to signal for backup at your location when in danger with unsubstantial support</label><br>
+      <br>
+      <span><strong>Push Trespassing</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with an individual pushing a citizen into a restricted area (trespassing) by applying the Warning System to the person who did the pushing and not the one who was pushed</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with an individual pushing a citizen into a restricted area (trespassing) as instead of applying the Warning System to the person who did the pushing, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Citizens Utilizing Turrets</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a citizen occupying the turret seat on an armed vehicle by treating it as they were armed themselves and thus immediately arresting them</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a citizen occupying the turret seat on an armed vehicle as instead of treating it as they were armed themselves and thus immediately arresting them, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Processing Citizens</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You efficiently and effectively dealt with citizens who wished to pass the border</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You did not efficiently and effectively deal with citizens who wished to pass the border as you <span class="editable-text" contenteditable="true">input</span>. To improve, you could have <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Idle Citizens</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a citizen who was idle in traffic at Border Gate by instructing them to move to the side</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly dealt with a citizen who was idle in traffic at Border Gate by instructing them to move to the side, and then applying the Warning System when they did not comply</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a citizen who was idle in traffic at Border Gate as instead of instructing them to move to the side, and then applying the Warning System if they did not comply, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>
+      <span><strong>Unable To Tase</strong></span><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly gave a warning in chat when unable to land a taser shot on a <span class="editable-text" contenteditable="true">input</span> instead of excessive attempts at tasing then warning them in accordance to the Warning System</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You properly switched to lethal force to terminate a <span class="editable-text" contenteditable="true">input</span> when unable to land a taser shot instead of excessive attempts at tasing then arresting them in accordance to the Warning System</label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a <span class="editable-text" contenteditable="true">input</span> when unable to land a taser shot on them as instead of just warning them in chat, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <label><input type="checkbox" onclick="updateCopiedText()"> You improperly dealt with a <span class="editable-text" contenteditable="true">input</span> when unable to land a taser shot on them as instead of switching to lethal force to terminate them, you <span class="editable-text" contenteditable="true">input</span></label><br>
+      <br>      
+      <button onclick="resetSubtab(this)">Reset this tab</button>
+    </div>
+  </div>
+
+  <div id="Communications & Teamwork" class="tabcontent">
+    <span><strong>Logging Warnings/Arrests</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged all warnings and arrests that you gave/made in a timely manner</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged all warnings and arrests that you gave/made</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged some warnings and arrests that you gave/made in a timely manner</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged some warnings and arrests that you gave/made</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged no warnings and arrests that you gave/made, which while is not required, it is highly suggested and requested to aid the duty execution of others</label><br>
+    <br>
+    <span><strong>Logging Rebel Locations</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You logged enemy locations and/or movements which were good to see and make for good communication</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You did not log enemy locations and/or movements, and which while they are not required, they make for good communication</label><br>
+    <br>
+    <span><strong>General Communications</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You ensured to clearly and efficiently communicate with fellow TNI/allies in regards to duties</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You gave clear warnings and directions to citizens in order to uphold law and order of the border</label><br>
+    <br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You did not communicate as often or as much as I would have liked to see. Instances of where you could have communicated or communicated better include but are not limited to <span class="editable-text" contenteditable="true">input</span></label><br>
+    <br>
+    <span><strong>Strategic Teamwork</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You assisted in pushes in defense of the Imperium from hostile forces</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> A positive to note was your assistance to fellow TNI and/or ally teams by healing them</label><br>
+    <br>
+    <button onclick="resetSubtab(this)">Reset this tab</button>
+  </div>
+
+  <div id="Conduct & Grammar" class="tabcontent">
+    <span><strong>Conduct</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You upheld the conduct and professionalism standards of The Military Police as you refrained from acts such as dancing in morph, using the boombox, and general acts of immaturity</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You did not uphold the conduct and professionalism standards of The Military Police as you <span class="editable-text" contenteditable="true">input</span></label><br>
+    <span><strong>Grammar</strong></span><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You met the grammatical and English proficiency standards of The Military Police</label><br>
+    <label><input type="checkbox" onclick="updateCopiedText()"> You did not meet the grammatical and English proficiency standards of The Military Police, and this may be due to factors such as English not being your first language or a lack of effort. If this was due to something that is out of your control such as dyslexia, then do not take this as a negative</label><br>
+    <br>
+    <button onclick="resetSubtab(this)">Reset this tab</button>
+  </div>
+
+  <textarea id="copied-text-area" placeholder="Selected items will appear here."></textarea>
+  <button id="copy-button" onclick="copySelectedText()">Copy Selected Text</button>
+
+  <script>
+    function openTab(evt, tabName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+      const tablinks = document.getElementsByClassName("tablinks");
+      for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+      localStorage.setItem('openTab', tabName);
+      // Set background color
+      Array.from(tablinks).forEach(tablink => {
+        tablink.style.backgroundColor = 'inherit'; // Reset all
+        tablink.style.color = ''; // Reset text color
+      });
+      evt.currentTarget.style.backgroundColor = 'green'; // Set active tab green
+      evt.currentTarget.style.color = 'white';
+    }
+
+    function openSubTab(evt, subtabName) {
+      const subtabcontent = document.getElementsByClassName("subtabcontent");
+      for (let i = 0; i < subtabcontent.length; i++) subtabcontent[i].style.display = "none";
+      const subtablinks = document.getElementsByClassName("subtablinks");
+      for (let i = 0; i < subtablinks.length; i++) subtablinks[i].classList.remove("active");
+      document.getElementById(subtabName).style.display = "block";
+      evt.currentTarget.classList.add("active");
+      const parentTabId = evt.currentTarget.closest('.tabcontent').id;
+      localStorage.setItem(`${parentTabId}_openSubTab`, subtabName);
+      // Set background color
+      Array.from(subtablinks).forEach(subtablink => {
+        subtablink.style.backgroundColor = 'inherit'; // Reset all
+        subtablink.style.color = ''; // Reset text color
+      });
+      evt.currentTarget.style.backgroundColor = 'green'; // Set active subtab green
+      evt.currentTarget.style.color = 'white';
+    }
+
+    function resetSubtab(button) {
+      const container = button.closest('.subtabcontent') || button.closest('.tabcontent');
+      const checkboxes = container.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(cb => cb.checked = false);
+      updateCopiedText(); // Update the copied text area
+      if (container.classList.contains('subtabcontent')) {
+        localStorage.removeItem(`${container.id}_checkboxes`);
+      } else if (container.classList.contains('tabcontent')) {
+        const subtabs = container.querySelectorAll('.subtabcontent');
+        subtabs.forEach(subtab => localStorage.removeItem(`${subtab.id}_checkboxes`));
+      }
+      // Reset background color of active subtab
+      const subtablinks = container.querySelectorAll('.subtablinks'); //gets the subtab buttons
+      subtablinks.forEach(link => {
+        link.style.backgroundColor = 'inherit';
+        link.style.color = ''; //reset text color
+      });
+      //make the first subtab active again.
+      if (subtablinks.length > 0) {
+        subtablinks[0].style.backgroundColor = 'green';
+        subtablinks[0].style.color = 'white';
+      }
+    }
+
+    function resetAll() {
+      const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+      allCheckboxes.forEach(cb => cb.checked = false);
+      updateCopiedText(); // Update the copied text area
+      localStorage.clear();
+      // Reset tab and subtab colors
+      const tablinks = document.querySelectorAll('.tablinks');
+      tablinks.forEach(tablink => {
+        tablink.style.backgroundColor = 'inherit';
+        tablink.style.color = '';
+      });
+      const subtablinks = document.querySelectorAll('.subtablinks');
+      subtablinks.forEach(subtablink => {
+        subtablink.style.backgroundColor = 'inherit';
+        subtablink.style.color = '';
+      });
+      // Open the first tab and subtab
+      openTab(null, 'DutyExecution');
+      const firstSubtab = document.querySelector('#DutyExecution .subtablinks');
+      if (firstSubtab) {
+        openSubTab(null, firstSubtab.textContent.replace(/ /g, ''));
+        firstSubtab.classList.add('active');
+        firstSubtab.style.backgroundColor = 'green';
+        firstSubtab.style.color = 'white';
+        document.getElementById(firstSubtab.textContent.replace(/ /g, '')).style.display = 'block';
+      }
+    }
+
+    function updateCopiedText() {
+      const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      const selectedTexts = [];
+      checkedBoxes.forEach(cb => {
+        // Assuming the checkbox is inside the label element
+        if (cb.parentNode.tagName.toLowerCase() === 'label') {
+          let labelText = cb.parentNode.textContent.trim();
+          // Get the editable text values
+          const editableTexts = cb.parentNode.querySelectorAll('.editable-text');
+          editableTexts.forEach(editableText => {
+            const editableTextValue = editableText.textContent.trim();
+            labelText = labelText.replace(/input/, editableTextValue); // Simple replacement
+          });
+          selectedTexts.push(labelText);
+        }
+      });
+      // Join with " . " and add a period at the end if there are any items
+      let sentenceText = selectedTexts.join(". ");
+      if (sentenceText.length > 0) {
+        sentenceText += ".";
+      }
+      document.getElementById('copied-text-area').value = sentenceText;
+      saveProgress(); // Save after updating
+    }
+
+    function copySelectedText() {
+      const textArea = document.getElementById('copied-text-area');
+      textArea.select();
+      document.execCommand('copy');
+      window.getSelection().removeAllRanges(); // Deselect the text
+      alert('Selected text copied to clipboard!');
+    }
+
+    function saveProgress() {
+      const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+      const checkboxStates = {};
+      allCheckboxes.forEach(cb => {
+        checkboxStates[cb.parentElement.textContent.trim()] = cb.checked;
+      });
+      localStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+      // Save editable text values
+      const editableTextValues = {};
+      const editableTexts = document.querySelectorAll('.editable-text');
+      editableTexts.forEach(input => {
+        const key = input.parentElement.textContent.trim();
+        editableTextValues[key] = input.textContent.trim();
+      });
+      localStorage.setItem('editableTextValues', JSON.stringify(editableTextValues));
+      const tabContents = document.querySelectorAll('.tabcontent');
+      tabContents.forEach(tabContent => {
+        const activeSubtab = tabContent.querySelector('.subtablinks.active');
+        if (activeSubtab) {
+          localStorage.setItem(`${tabContent.id}_openSubTab`, activeSubtab.textContent.replace(/ /g, ''));
+        }
+      });
+      localStorage.setItem('copiedText', document.getElementById('copied-text-area').value);
+      localStorage.setItem('openTab', document.querySelector('.tablinks.active')?.textContent || 'DutyExecution');
+      console.log('Progress saved!');
+    }
+
+    function loadProgress() {
+      const savedTab = localStorage.getItem('openTab');
+      if (savedTab) {
+        openTab(null, savedTab);
+        const tablinks = document.querySelectorAll('.tablinks');
+        tablinks.forEach(link => {
+          if (link.textContent === savedTab) {
+            link.classList.add('active');
+            link.style.backgroundColor = 'green'; // Restore active tab color
+            link.style.color = 'white';
+          } else {
+            link.style.backgroundColor = '';
+            link.style.color = '';
+          }
+        });
+        const activeTabContent = document.getElementById(savedTab);
+        if (activeTabContent) {
+          const savedSubTab = localStorage.getItem(`${savedTab}_openSubTab`);
+          if (savedSubTab) {
+            openSubTab(null, savedSubTab);
+            const subtablinks = activeTabContent.querySelectorAll('.subtablinks');
+            subtablinks.forEach(link => {
+              if (link.textContent.replace(/ /g, '') === savedSubTab) {
+                link.classList.add('active');
+                link.style.backgroundColor = 'green'; // Restore active subtab color
+                link.style.color = 'white';
+              } else {
+                link.style.backgroundColor = '';
+                link.style.color = '';
+              }
+            });
+            document.getElementById(savedSubTab).style.display = 'block';
+          } else {
+            const firstSubtab = activeTabContent.querySelector('.subtablinks');
+            if (firstSubtab) {
+              openSubTab(null, firstSubtab.textContent.replace(/ /g, ''));
+              firstSubtab.classList.add('active');
+              firstSubtab.style.backgroundColor = 'green';
+              firstSubtab.style.color = 'white';
+              document.getElementById(firstSubtab.textContent.replace(/ /g, '')).style.display = 'block';
+            }
+          }
+        }
+      } else {
+        openTab(null, 'DutyExecution');
+        const firstSubtab = document.querySelector('#DutyExecution .subtablinks');
+        if (firstSubtab) {
+          openSubTab(null, firstSubtab.textContent.replace(/ /g, ''));
+          firstSubtab.classList.add('active');
+          firstSubtab.style.backgroundColor = 'green';
+          firstSubtab.style.color = 'white';
+          document.getElementById(firstSubtab.textContent.replace(/ /g, '')).style.display = 'block';
+        }
+      }
+
+      function parseBoldSyntax() {
+        const labels = document.querySelectorAll('label');
+        labels.forEach(label => {
+          // Get the original text but exclude the checkbox input element
+          let html = label.innerHTML;
+          // Replace **word** with <strong>word</strong>
+          html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+          label.innerHTML = html;
+        });
+      }
+      // Call this after the page loads or after dynamically changing labels
+      parseBoldSyntax();
+      const savedCheckboxStates = localStorage.getItem('checkboxStates');
+      if (savedCheckboxStates) {
+        const states = JSON.parse(savedCheckboxStates);
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+        allCheckboxes.forEach(cb => {
+          const label = cb.parentElement.textContent.trim();
+          if (states.hasOwnProperty(label)) {
+            cb.checked = states[label];
+          }
+        });
+      }
+      const savedEditableTextValues = localStorage.getItem('editableTextValues');
+      if (savedEditableTextValues) {
+        const savedValues = JSON.parse(savedEditableTextValues);
+        const editableTexts = document.querySelectorAll('.editable-text');
+        editableTexts.forEach(input => {
+          const key = input.parentElement.textContent.trim();
+          if (savedValues.hasOwnProperty(key)) {
+            input.textContent = savedValues[key];
+          }
+        });
+      }
+      const savedCopiedText = localStorage.getItem('copiedText');
+      if (savedCopiedText) {
+        document.getElementById('copied-text-area').value = savedCopiedText;
+      }
+    }
+    if (!localStorage.getItem('openTab')) {
+      document.addEventListener('DOMContentLoaded', () => {
+        openTab(null, 'DutyExecution');
+        const firstSubtab = document.querySelector('#DutyExecution .subtablinks');
+        if (firstSubtab) {
+          openSubTab(null, firstSubtab.textContent.replace(/ /g, ''));
+          firstSubtab.classList.add('active');
+          firstSubtab.style.backgroundColor = 'green';
+          firstSubtab.style.color = 'white';
+          document.getElementById(firstSubtab.textContent.replace(/ /g, '')).style.display = 'block';
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>
